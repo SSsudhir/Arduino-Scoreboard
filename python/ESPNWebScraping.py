@@ -4,8 +4,9 @@ import requests
 import json
 
 class ESPNWebScraping():
-	def __init__(self, teams = []):
+	def __init__(self, url, teams = []):
 		self.teams = teams
+		self.url = url
 		self.gameData = []
 
 	def getGameData(self):
@@ -23,7 +24,7 @@ class ESPNWebScraping():
 		return teamsPlayingToday
 		
 	def updateScore(self):
-		result = requests.get("https://www.espn.com/nba/scoreboard")
+		result = requests.get(self.url)
 		soup = bs4.BeautifulSoup(result.text, "lxml")
 
 		s = str(soup.select('script')[13])
