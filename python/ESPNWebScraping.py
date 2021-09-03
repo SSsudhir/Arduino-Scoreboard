@@ -19,7 +19,7 @@ class ESPNWebScraping():
 		teamsPlayingToday = []
 
 		for game in self.gameData:
-			teamsPlayingToday += list(game.keys())
+			teamsPlayingToday += list(game.keys())[:2]
 
 		return teamsPlayingToday
 		
@@ -39,6 +39,7 @@ class ESPNWebScraping():
 
 		for index, game in enumerate(finalJSON['events']):
 			self.gameData.append([])
+
 			for team in game['competitions'][0]['competitors']:
 				abbrev = team['team']['abbreviation']
 				score = team['score']
@@ -47,3 +48,7 @@ class ESPNWebScraping():
 					self.gameData[index] = {}
 
 				self.gameData[index][abbrev] = score
+
+			self.gameData[index]['gameCompleted'] = game['status']['type']['completed']
+			self.gameData[index]['gameQuarter'] = game['status']['period']
+			self.gameData[index]['gameClock'] = game['status']['displayClock']

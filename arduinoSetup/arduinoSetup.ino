@@ -30,7 +30,7 @@ byte emptyPixel[] = {
 void setup() {
   Serial.begin(9600);
   lcd.begin(16, 2);
-  lcd.print(" NBA Scoreboard");
+  lcd.print("   Scoreboard   ");
   
   lcd.createChar(0, fullPixel);
   lcd.createChar(1, emptyPixel);
