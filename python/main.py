@@ -13,7 +13,7 @@ while True:
 
 
 sport = 'nba' # Choose nba, nfl or mlb
-obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + sport + "/scoreboard/")
+obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + sport + "/scoreboard/_/date/20201225")
 arduino = Arduino.Arduino('/dev/cu.usbmodem1101')
 
 t_end = time.time() + runTime * 60
@@ -36,13 +36,19 @@ while time.time() < t_end:
 			secondTeamScoreLen = len(game[teams[2*index+1]])
 			gameClockLen = len(game['gameClock'])
 
-			displayString = StringFormatter.stringFormatter(index, game, teams, [firstTeamLen, secondTeamLen, firstTeamScoreLen, secondTeamScoreLen,gameClockLen])
-
+			displayString = StringFormatter.gameScoreFormat(index, game, teams, [firstTeamLen, secondTeamLen, firstTeamScoreLen, secondTeamScoreLen,gameClockLen])
 			arduino.display(displayString)
-			time.sleep(5)
+
+			displayString = StringFormatter.playerStatFormat(game, 0)
+			arduino.display(displayString)
+
+			displayString = StringFormatter.playerStatFormat(game, 1)
+			arduino.display(displayString)
 
 	arduino.updatingScoreAnimation()
-    
+
+arduino.display('  Program Time  \     Expired    ')
+time.sleep(4)
 arduino.close()
 
 
