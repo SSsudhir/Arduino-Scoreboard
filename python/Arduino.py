@@ -16,4 +16,3 @@ class Arduino(object):
 
 	def close(self):
 		self.s.close()
-		

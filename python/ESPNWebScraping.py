@@ -49,6 +49,5 @@ class ESPNWebScraping():
 
 				self.gameData[index][abbrev] = score
 
-			self.gameData[index]['gameCompleted'] = game['status']['type']['completed']
 			self.gameData[index]['gameQuarter'] = game['status']['period']
 			self.gameData[index]['gameClock'] = game['status']['displayClock']
