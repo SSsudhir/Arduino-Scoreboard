@@ -4,8 +4,7 @@ import requests
 import json
 
 class ESPNWebScraping():
-    def __init__(self, url, teams = []):
-        self.teams = teams
+    def __init__(self, url):
         self.url = url
         self.gameData = []
 

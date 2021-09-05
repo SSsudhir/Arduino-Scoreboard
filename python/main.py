@@ -12,22 +12,22 @@ while True:
         print('Error, try again! Make sure you enter a whole number like 1,2,20 etc.')
 
 
-sport = 'nba' # Choose nba, nfl or mlb
-obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + sport + "/scoreboard/_/date/20201225")
-arduino = Arduino.Arduino('/dev/cu.usbmodem1101')
+sport = 'mlb' # Choose nba, nfl or mlb
+obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + sport + "/scoreboard/")
+arduino = Arduino.Arduino('/dev/cu.usbmodem1101') # Change Arduino Port to reflect your own
 
 t_end = time.time() + runTime * 60
 time.sleep(2) # Allow time for arduino to be created and initialized
 
 print('Starting scoreboard! Type the keys control + c at anytime to stop the scoreboard')
 
-while time.time() < t_end:
+while time.time() < t_end: # Run program till the user requested time expires
     teams = obj.getTeamPlayingToday()
     games = obj.getGameData()
 
-    minuteTimer = time.time() + 60
+    minuteTimer = time.time() + 60 
 
-    while time.time() < minuteTimer:
+    while time.time() < minuteTimer: # Refresh the score every minute
         for index, game in enumerate(games):
 
             firstTeamLen = len(teams[2*index])
@@ -45,10 +45,9 @@ while time.time() < t_end:
             displayString = StringFormatter.playerStatFormat(game, 1)
             arduino.display(displayString)
 
-    arduino.updatingScoreAnimation()
+    arduino.updatingScoreAnimation() # Play animation reflecting an update is ongoing
 
 arduino.display('  Program Time  \     Expired    ')
-time.sleep(4)
 arduino.close()
 
 

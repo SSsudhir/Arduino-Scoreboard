@@ -13,8 +13,11 @@ def gameScoreFormat(index, game, teams, valueLengths):
     return scoreString
 
 def playerStatFormat(game, index):
+    # If game has not begun, do not format string as it is empty
     if str(game['playerName' + f'{index}']) == '':
         return ''
+
+
     playerString = str(game['playerName' + f'{index}'])
 
     playersStatLine = str(game['bestPlayerStats' + f'{index}'])
