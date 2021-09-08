@@ -12,8 +12,8 @@ while True:
         print('Error, try again! Make sure you enter a whole number like 1,2,20 etc.')
 
 
-sport = 'mlb' # Choose nba, nfl or mlb
-obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + sport + "/scoreboard/")
+sport = 'nba' # Choose nba, nfl or mlb
+obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + sport + "/scoreboard/_/date/20190322")
 arduino = Arduino.Arduino('/dev/cu.usbmodem1101') # Change Arduino Port to reflect your own
 
 t_end = time.time() + runTime * 60
@@ -35,6 +35,9 @@ while time.time() < t_end: # Run program till the user requested time expires
             firstTeamScoreLen = len(game[teams[2*index]])
             secondTeamScoreLen = len(game[teams[2*index+1]])
             gameClockLen = len(game['gameClock'])
+
+            if game['gameQuarter'] == 0:
+                print("This is the game clock data type: {}".format(type(game['gameClock'])))
 
             displayString = StringFormatter.gameScoreFormat(index, game, teams, [firstTeamLen, secondTeamLen, firstTeamScoreLen, secondTeamScoreLen,gameClockLen])
             arduino.display(displayString)
