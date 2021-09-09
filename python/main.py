@@ -12,9 +12,10 @@ while True:
         print('Error, try again! Make sure you enter a whole number like 1,2,20 etc.')
 
 
-sport = 'nba' # Choose nba, nfl or mlb
-obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + sport + "/scoreboard/_/date/20190322")
-arduino = Arduino.Arduino('/dev/cu.usbmodem1101') # Change Arduino Port to reflect your own
+port = '/dev/cu.usbmodem1101'
+league = 'nba' # Choose nba, nfl or mlb
+obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + league + "/scoreboard/_/date/20190322")
+arduino = Arduino.Arduino(port) # Change Arduino Port to reflect your own
 
 t_end = time.time() + runTime * 60
 time.sleep(2) # Allow time for arduino to be created and initialized
@@ -36,8 +37,10 @@ while time.time() < t_end: # Run program till the user requested time expires
             secondTeamScoreLen = len(game[teams[2*index+1]])
             gameClockLen = len(game['gameClock'])
 
-            if game['gameQuarter'] == 0:
-                print("This is the game clock data type: {}".format(type(game['gameClock'])))
+            if game['gameQuarter'] == 4:
+                if abs(int(game[teams[2*index]]) - int(game[teams[2*index]])) <= 5:
+                    if game['gameClock'][:2] == "0:" || "1:":
+                        arduino.turnOnLED()
 
             displayString = StringFormatter.gameScoreFormat(index, game, teams, [firstTeamLen, secondTeamLen, firstTeamScoreLen, secondTeamScoreLen,gameClockLen])
             arduino.display(displayString)
@@ -47,6 +50,8 @@ while time.time() < t_end: # Run program till the user requested time expires
 
             displayString = StringFormatter.playerStatFormat(game, 1)
             arduino.display(displayString)
+
+            arduino.turnOffLED()
 
     arduino.updatingScoreAnimation() # Play animation reflecting an update is ongoing
 

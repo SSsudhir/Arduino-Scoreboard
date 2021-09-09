@@ -19,5 +19,11 @@ class Arduino(object):
         time.sleep(3)
         self.s.write(str.encode('~'))
 
+    def turnOnLED(self):
+        self.s.write(str.encode('!'))
+
+    def turnOffLED(self):
+        self.s.write(str.encode('$'))
+
     def close(self):
         self.s.close()

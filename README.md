@@ -15,6 +15,9 @@ This data is then formatted with the help of `StringFormatter.py` and sent to `A
 
 ## Demo
 
+The following GIF shows a sample run of the Arduino Scoreboard. This GIF outlines some of the key features, such as updating the scores every minute, displaying the leading performers for each team and activating the Green LED when we have a close game with 2 minutes left. (The video has been converted to 7fps and 1.2 speed for space considerations)
+
+![demo-gif](resources/arduinoScoreBoardGIF.gif)
 
 
 ## How to use
@@ -31,7 +34,7 @@ To use this software on your own Arduino, complete the following steps (this is 
 - Download the Arduino IDE if you have not already, can be installed [here](https://www.arduino.cc/en/Main/Software)
 - Wire your Arduino following the image found below
 ![arduino-wiring-image](resources/ArduinoWiring.png)
-- Change the Arduino Port in `main.py` under the variable `arduino` to reflect your own (you can also change your league of choice here by change the `league` variable). If you do not know your port, it can be found following the steps outlined [here](https://www.mathworks.com/help/supportpkg/arduinoio/ug/find-arduino-port-on-windows-mac-and-linux.html)
+- Change the Arduino Port in `main.py` under the variable `port` to reflect your own (you can also change your league of choice here by change the `league` variable). If you do not know your port, it can be found following the steps outlined [here](https://www.mathworks.com/help/supportpkg/arduinoio/ug/find-arduino-port-on-windows-mac-and-linux.html)
 - Connect your Arduino to your computer and open the `arduinoSetup.ino` file within the Arduino IDE and ensure you are connected to the board
 - Now simply cd into the `/python` directory of this project and run `python main.py` and enter the duration you would like for this program to run
 

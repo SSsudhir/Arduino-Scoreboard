@@ -28,6 +28,8 @@ byte emptyPixel[] = {
 
 
 void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  
   Serial.begin(9600);
   lcd.begin(16, 2);
   lcd.print("   Scoreboard   ");
@@ -45,6 +47,14 @@ void loop() {
       if (c == '\\')
       {
         lcd.setCursor(0, 1);
+      }
+      else if (c == '!')
+      {
+        digitalWrite(LED_BUILTIN, HIGH);
+      }
+      else if (c == '$')
+      {
+        digitalWrite(LED_BUILTIN, LOW);
       }
       else if (c == '~')
       {
