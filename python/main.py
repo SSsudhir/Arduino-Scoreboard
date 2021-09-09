@@ -14,7 +14,7 @@ while True:
 
 port = '/dev/cu.usbmodem1101'
 league = 'nba' # Choose nba, nfl or mlb
-obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + league + "/scoreboard/_/date/20190322")
+obj = ESPNWebScraping.ESPNWebScraping("https://www.espn.com/" + league + "/scoreboard/")
 arduino = Arduino.Arduino(port) # Change Arduino Port to reflect your own
 
 t_end = time.time() + runTime * 60
@@ -39,7 +39,7 @@ while time.time() < t_end: # Run program till the user requested time expires
 
             if game['gameQuarter'] == 4:
                 if abs(int(game[teams[2*index]]) - int(game[teams[2*index]])) <= 5:
-                    if game['gameClock'][:2] == "0:" || "1:":
+                    if game['gameClock'][:2] == "0:" or "1:":
                         arduino.turnOnLED()
 
             displayString = StringFormatter.gameScoreFormat(index, game, teams, [firstTeamLen, secondTeamLen, firstTeamScoreLen, secondTeamScoreLen,gameClockLen])
