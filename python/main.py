@@ -6,7 +6,7 @@ import StringFormatter
 
 while True:
     try:
-        runTime = int(input('How long would you like this program to run (in minutes)? '))
+        runTime = int(input('How long would you like this program to run (in minutes)?: '))
         break
     except:
         print('Error, try again! Make sure you enter a whole number like 1,2,20 etc.')
